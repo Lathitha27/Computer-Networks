@@ -5,7 +5,7 @@ Individual network design and simulation project for CMPG 325, addressing a real
 ## Project Overview
 
 | | |
-
+|-|-|
 | **Project ID** | CMPG325-2026-017 |
 | **Client ID** | CLI-017 |
 | **Assigned Organisation** | Tlou Furniture & Appliances (Rustenburg) |
