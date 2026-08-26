@@ -68,10 +68,10 @@ The network configures, verifies, and demonstrates wireless security using WPA2-
 ```
 .
  README.md
- design/            # Topology diagrams, IP addressing plan, design rationale
- packet-tracer/      # Final .pkt files
- evidence/           # Configuration and testing screenshots
- troubleshooting/     # Notes on issues encountered and resolved
+ design            # Topology diagrams, IP addressing plan, design rationale
+ packet-tracer      # Final .pkt files
+ evidence           # Configuration and testing screenshots
+ troubleshooting     # Notes on issues encountered and resolved
  reflection.md        # Short reflection on the completed project
 ```
 
