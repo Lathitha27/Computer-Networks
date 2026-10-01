@@ -1,6 +1,6 @@
 # CMPG325 Network Design Project - Tlou Furniture & Appliances
 
-Individual network design and simulation project for CMPG 325, addressing a real world networking challenge for an assigned retail client using Cisco Packet Tracer.
+Individual network design and Cisco Packet Tracer implementation for CMPG 325, based on the assigned retail client scenario for Tlou Furniture & Appliances (Rustenburg).
 
 ## Project Overview
 
@@ -10,71 +10,84 @@ Individual network design and simulation project for CMPG 325, addressing a real
 | **Client ID** | CLI-017 |
 | **Assigned Organisation** | Tlou Furniture & Appliances (Rustenburg) |
 | **Industry** | Retail |
+| **Addressing Block** | 172.30.2.0/23 |
+| **Assigned Feature** | Wireless Security - WPA2-PSK hardening |
+| **Change Request** | CR6 - future branch office accommodation |
 
-## 1.Role
+## Phase 2 Status
 
-As the assigned network designer, this project involves analysing the client scenario, designing and simulating the network in Cisco Packet Tracer, configuring the solution, testing it, and documenting evidence of the completed work.
+**Phase 2 implementation completed and tested.**
 
-## 2.Client Background
+The working Packet Tracer network includes VLAN segmentation, inter-VLAN routing, DHCP, server connectivity, WPA2-PSK wireless security, routing/NAT, ISP simulation, and end-to-end connectivity testing.
 
-Tlou Furniture & Appliances is a retail organisation based in Rustenburg. The project scope and requirements below are specific to this client and are not interchangeable with other project scenarios.
+## Implemented Topology
 
-## 3.Network Problem / Design Need
+- ISR4321 router as **R1**
+- ISR4321 router as simulated **ISP**
+- Catalyst 3560 multilayer switch as **CORE-SW**
+- Catalyst 2960 switches: **SW-ADMIN**, **SW-SALES**, **SW-WAREHOUSE**
+- Access points: **AP1**, **AP2**
+- **SERVER1**
+- 3 Admin PCs, 4 Sales/POS PCs, 2 Warehouse PCs
+- **STAFF-LAPTOP1**
 
-Design and simulate a computer network that addresses the client's networking needs. The completed network must use the assigned addressing block and change request specified in this brief, in line with the CMPG 325 Project Handbook.
+## VLAN and Addressing Plan
 
-## 4.Client Requirements
+| VLAN | Purpose | Network | Gateway |
+|---|---|---|---|
+| 10 | Admin / Management | 172.30.2.64/27 | 172.30.2.65 |
+| 20 | Sales / POS | 172.30.2.0/26 | 172.30.2.1 |
+| 30 | Warehouse / Inventory | 172.30.2.96/27 | 172.30.2.97 |
+| 40 | Staff Wireless | 172.30.2.128/27 | 172.30.2.129 |
+| 50 | Servers | 172.30.2.176/29 | 172.30.2.177 |
+| 99 | Network Management | 172.30.2.160/28 | 172.30.2.161 |
 
-- **Assigned organisation:** Tlou Furniture & Appliances (Rustenburg)
-- **Industry:** Retail
-- **Assigned addressing block:** 172.30.2.0/23
-- Provide appropriate connectivity and network services for the assigned scenario
-- Accommodate the stated design constraint and change request
-- Produce a working, testable Packet Tracer implementation
+Additional routed links:
+- CORE-SW ↔ R1: 172.30.2.188/30 (.190 / .189)
+- R1 ↔ ISP: 172.30.2.184/30 (.185 / .186)
 
-## 5.Network Design Requirements
+> Note: VLAN 50 was used for the server segment because the Phase 1 document specified the server subnet but did not assign a VLAN number.
 
-- Use Cisco Packet Tracer for network implementation and simulation
-- Design an appropriate topology and device arrangement for the scenario
-- Use the assigned addressing block (172.30.2.0/23) as the basis of the IP addressing plan
-- Configure the necessary routers, switches, end devices, and other required nodes
-- Demonstrate successful connectivity and testing
-- Document significant design decisions and evidence in GitHub
+## Implemented Features
 
-## 6.Design Constraint
+- 802.1Q trunks between CORE-SW and access switches
+- Native VLAN 99 on switch-to-switch trunks
+- Layer 3 inter-VLAN routing
+- DHCP for Admin, Sales/POS, Warehouse and Staff Wi-Fi
+- Static SERVER1 addressing
+- WPA2-PSK with AES
+- SSID: `Tlou-Staff-WiFi`
+- Static routing on R1
+- NAT/PAT overload
+- Simulated ISP connectivity
+- Successful end-to-end ping testing
 
-Limited equipment budget - existing switches are reused where possible rather than adding new hardware.
+## Testing Results
 
-## 7.Assigned Networking Challenge
+Successful tests included:
+- Admin DHCP addressing
+- Sales/POS DHCP addressing
+- Warehouse DHCP addressing
+- Inter-VLAN connectivity
+- SERVER1 reachability
+- Wireless gateway reachability
+- Wireless-to-server reachability
+- ISP reachability
+- Simulated Internet ping to `8.8.8.8`
 
-**Wireless Security (WPA2-PSK hardening; Enterprise optional extension)** 
+Recorded final tests showed **0% packet loss**.
 
-The network configures, verifies, and demonstrates wireless security using WPA2-PSK hardening (with an optional Enterprise-level extension), including an explanation of what was configured, why it's appropriate and how it was verified.
+## Repository Structure
 
-## 8.Client Change Request
-
-**CR6 - Branch office planned:** Design and addressing accommodation only, no second site build is required. The solution shows how the network design and addressing plan accommodate a future branch office, without introducing additional scope beyond what is specified.
-
-## 9.Testing
-
-- End-to-end connectivity tested across the network
-- Assigned networking challenge (WPA2-PSK hardening) verified
-- Evidence of successful configuration and operation captured
-- Troubleshooting performed and documented
-- Final `.pkt` file opens and reproduces the working solution
-
-## 10.Repository Structure
-
-```
+```text
 .
- README.md
- design            # Topology diagrams, IP addressing plan, design rationale
- packet-tracer      # Final .pkt files
- evidence           # Configuration and testing screenshots
- troubleshooting     # Notes on issues encountered and resolved
- reflection.md        # Short reflection on the completed project
+├── README.md
+├── reflection.md
+├── design/
+├── packet-tracer/
+├── documentation/
+├── evidence/
+└── troubleshooting/
 ```
 
-## 11.Status
-
-In progress - individual submission for CMPG 325. This repository serves as the GitHub Portfolio of Evidence for the project, including client requirements, network design, IP addressing, Packet Tracer implementation, configuration, testing and reflection.
+The final `.pkt` file should be placed in `packet-tracer/`.
