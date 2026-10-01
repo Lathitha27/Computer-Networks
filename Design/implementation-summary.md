@@ -2,7 +2,7 @@
 
 ## CORE-SW
 - Catalyst 3560 multilayer switch
-- `ip routing` enabled
+- ip routing enabled
 - SVIs for VLANs 10, 20, 30, 40, 50 and 99
 - Inter-VLAN routing performed at the core
 - Gi1/0/1 routed to R1 at 172.30.2.190/30
